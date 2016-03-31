@@ -68,7 +68,7 @@ def generate_graph(text_hashtags):
 			else:
 				for x in t:
 					#list elt expect current (x) elt:
-					mylist= list ( set(t) -set(x) )
+					mylist= list ( set(t) -set([x]) )
 					#handle if already present in the graph:
 					if x in mydict.keys():
 						#merge distinct elmnt:
@@ -85,7 +85,7 @@ def compute_average_degree(mydict):
 		#loop thru all keys and count number of elmnt foreach key:
 		for k in mydict.keys():
 			mydict[k]=len(mydict[k])*1.00
-		average_degree=np.nanmean( mydict.values() )
+		average_degree=np.nanmean( mydict.values() )*1.00
 	return average_degree
 
 ###############################################################################
@@ -93,24 +93,19 @@ def compute_average_degree(mydict):
 def write_output(output_value):
 	#open with append option:
 	f = open('tweet_output/output.txt', 'a')
-	f.write(str(np.round(output_value,2))+'\n')
+	f.write(str(format(output_value, '.2f'))+'\n')
 	f.close()
 ############### stream average degree of tweets hashtags as they come ######
 def stream_average_degree (text_hashtags):
 	for i in range(1,len(text_hashtags)+1):
-		if i==0:
-			#handle error in np.max when there is only one item (in this case)
-			tmp= [df['created_at'][0],df['created_at'][0]]
-			txt,_=select_last60_seconds(text_hashtags[0],tmp)
-		else:
-			txt,_=select_last60_seconds(text_hashtags[:i],df['created_at'][:i])
+		txt,_=select_last60_seconds(text_hashtags[:i],df['created_at'][:i])
 		#generate graph (a dict that map each hashtag)
 		graph=generate_graph(txt)
 		
 		#compute average degree of a node and store cumulated results 
 		#as tweets come:
 		average=compute_average_degree(graph) 
-		print np.round(average,2)
+		print "rolling mean at " + str(i) + " is " + str(format(average, '.2f'))
 		write_output(average)
 ##############################Main program########################################
 df=read_json_tweets("tweet_input/tweets.txt")
