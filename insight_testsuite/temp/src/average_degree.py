@@ -60,6 +60,7 @@ def select_last60_seconds(text_hashtags,time_hashtags):
 def generate_graph(text_hashtags):
 	mydict={} #to store graph
 	for t in text_hashtags:
+		print t
 		if len(t)>0:
 			#handle case where there is only one hashtag
 			if len(t)==1:
