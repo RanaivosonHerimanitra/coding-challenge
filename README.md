@@ -18,12 +18,12 @@ On the cli inside `coding-challenge` directory, enter:
 
 ## Algorithm (details implementation):
 
-1. a function reads data from `tweets.txt` and parse it so that built-in function from `pandas` package can easily transform it into a dataframe.
+1. A function reads data from `tweets.txt` and parse it so that built-in function from `pandas` package can easily transform it into a dataframe.
 
-2. a function  extracts hashtags for each tweet and store them in a `python list`. This `python list` has exactly the same length as the `timestamp list` to ensure time
+2. A function  extracts hashtags for each tweet and store them in a `python list`. This `python list` has exactly the same length as the `timestamp list` to ensure time
 consistency during streaming.
 
-3. a third function handles streaming of tweets by calling 03 functions.
+3. A third function handles streaming of tweets by calling 03 functions.
 
  * First tweet is processed then first 02 tweets then first three tweets and so on until the `n` tweets.
 
@@ -37,8 +37,10 @@ consistency during streaming.
 
 
 
-## Unit Tests:
+## Unit Tests covered:
 
-* Test for two consecutive tweets with no hashtag passed! Expected output `0.00`, `0.00`
+* Test for two consecutive tweets with no hashtag `passed`! Expected output are `0.00` and `0.00`
 
-* Test for two consecutive tweets with 02 hashtags with exactly the same hashtags passed! Expected output `1.00`, `1.00`
+* Test for two consecutive tweets with 02 hashtags with exactly the same hashtags `passed`! Expected output are `1.00` and `1.00`
+
+* Test for two consecutive tweets (non empty hashtags) but with time difference `> 60 seconds` `passed`! Expected output are `1.00` and `3.00`

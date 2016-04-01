@@ -2,7 +2,7 @@
 import sys
 dir1= "./insight_testsuite/tests/test-2-tweets-nohashtag/tweet_output/output.txt"
 dir2="./insight_testsuite/tests/test-2-tweets-all-equal/tweet_output/output.txt"
-dir3="./insight_testsuite/tests/test-3-tweets/tweet_output/output.txt"
+dir3="./insight_testsuite/tests/test-2-tweets-morethan60s-timediff/tweet_output/output.txt"
 
 if dir1==sys.argv[1]:
 	error=0;
@@ -13,6 +13,7 @@ if dir1==sys.argv[1]:
 			else:
 				error=1
 				print("test failed!")
+				
 if dir2==sys.argv[1]:
 	error=0;
 	with open (sys.argv[1], 'r') as f :
@@ -28,7 +29,7 @@ if dir3 ==sys.argv[1]:
 	with open(sys.argv[1],'r') as f:
 		for i in f:
 			output_value.append(str(i.rstrip()))
-	expected_output_value = ["1.00","2.00","2.85"]
+	expected_output_value = ["1.00","3.00"]
 	for p,q in zip(output_value,expected_output_value):
 		if p==q:
 			print ("test passed!")

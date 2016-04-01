@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import pandas as pd 
 import numpy as np
+import sys
 
 ### Function that correctly parse json format from tweets.txt using pandas ####
 ### and select field/entity of interests , here: "id","created_at" and "entities"
@@ -108,8 +109,6 @@ def stream_average_degree (text_hashtags):
 		print "rolling mean at " + str(i) + " is " + str(format(average, '.2f'))
 		write_output(average)
 ##############################Main program########################################
-import sys
-import os 
 #sys.argv[1]===>"tweet_input/tweets.txt" (first argument,input )
 df=read_json_tweets(sys.argv[1])
 text_hashtags=process_hashtags_into_array(df=df)
