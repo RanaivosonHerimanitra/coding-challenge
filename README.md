@@ -15,6 +15,11 @@ On the cli inside `coding-challenge` directory, enter:
 `bash run.sh` 
 (ensure you have correct permission otherwise add `sudo` before `bash`)
 
+`average_degree.py` implements the algorithm and takes exactly 02 arguments from the cli:
+
+* input location : `tweet_input/tweets.txt` and
+* output location: `tweet_output/output.txt`
+
 ### Monitor progress on the cli:
 
 You should see stuff like this:
@@ -44,8 +49,15 @@ consistency during streaming.
 
 ## Unit Tests covered:
 
+I implement 03 additional unit tests:
+
 * Test for two consecutive tweets with no hashtag `passed`! Expected output are `0.00` and `0.00`
 
 * Test for two consecutive tweets with 02 hashtags with exactly the same hashtags `passed`! Expected output are `1.00` and `1.00`
 
 * Test for two consecutive tweets (non empty hashtags) but with time difference `> 60 seconds` `passed`! Expected output are `1.00` and `3.00`
+
+To run the test I provided, enter:
+
+`myrun_tests.sh`
+
