@@ -56,6 +56,7 @@ def process_hashtags_into_array(df):
 def select_last60_seconds(text_hashtags,time_hashtags):
 	max_timestamp_value=np.max(time_hashtags)
 	min_timestamp_value = max_timestamp_value - np.timedelta64(60, 's')
+	
 	#latest 60 hashtags:
 	latest60_hashtags_text = []
 	latest60_hashtags_time = []
@@ -63,7 +64,7 @@ def select_last60_seconds(text_hashtags,time_hashtags):
 		if mytime>=min_timestamp_value and mytime<=max_timestamp_value:
 			latest60_hashtags_text.append(mytext)
 			latest60_hashtags_time.append(mytime)
-	return latest60_hashtags_text,latest60_hashtags_time
+	return latest60_hashtags_text,np.max(latest60_hashtags_time),np.min(latest60_hashtags_time),latest60_hashtags_time
 
 
 
@@ -135,13 +136,16 @@ def write_output(output_value):
 ############### using all functions created above ##########################
 def stream_average_degree (text_hashtags):
 	for i in range(1,len(text_hashtags)+1):
-		txt,_=select_last60_seconds(text_hashtags[:i],df['created_at'][:i])
+		txt,maxtime,mintime,_=select_last60_seconds(text_hashtags[:i],df['created_at'][:i])
 		#generate graph (a dict that map each hashtag)
 		graph=generate_graph(txt)
 		#compute average degree of a node and store cumulated results 
 		#as tweets come:
 		average=compute_average_degree(graph) 
-		print "rolling mean at " + str(i) + " is " + str(format(average, '.2f'))
+		message= "average degree of the graph when tweet " + str(i) + " has been received is "
+		message=message + str(format(average, '.2f'))
+		message= message + ",timestamp lies between: " +str(mintime) + " and " + str(maxtime)
+		print  message
 		write_output(average)
 
 
