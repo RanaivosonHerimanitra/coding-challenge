@@ -23,9 +23,9 @@ You should see stuff like this:
 
 ## Algorithm (details implementation):
 
-1. A function reads data from `tweets.txt` and parse it so that built-in function from `pandas` package can easily transform it into a dataframe.
+1. A function reads data from `tweets.txt` and parses it so that built-in function from `pandas` package can easily transform it into a dataframe.
 
-2. A function  extracts hashtags for each tweet and store them in a `python list`. This `python list` has exactly the same length as the `timestamp list` to ensure time
+2. A function  extracts hashtags for each tweet and stores them in a `python list`. This `python list` has exactly the same length as the `timestamp list` to ensure time
 consistency during streaming.
 
 3. A third function handles streaming of tweets by calling 03 functions.
