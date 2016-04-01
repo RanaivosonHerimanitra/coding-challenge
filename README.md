@@ -15,6 +15,11 @@ On the cli inside `coding-challenge` directory, enter:
 `bash run.sh` 
 (ensure you have correct permission otherwise add `sudo` before `bash`)
 
+### Monitor progress on the cli:
+
+You should see stuff like this:
+
+<img src="print_message.png">
 
 ## Algorithm (details implementation):
 
