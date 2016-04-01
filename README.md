@@ -57,7 +57,15 @@ I implement 03 additional unit tests:
 
 * Test for two consecutive tweets (non empty hashtags) but with time difference `> 60 seconds` `passed`! Expected output are `1.00` and `3.00`
 
-To run the test I provided, enter:
+Hashtags from this last test include:
+
+* 1st tweet: `[{"text":"Pisteare","indices":[9,18]},{"text":"elsientometro","indices":[46,60]}]`
+
+* 2nd tweet: `[{"text":"fullset","indices":[28,36]},{"text":"whitepinkacrylic","indices":[37,54]},{"text":"ArceliasNails","indices":[55,69]},{"text":"mobilehomebasednailservice","indices":[70,97]}]`
+
+
+
+To run tests I provided, enter:
 
 `myrun_tests.sh`
 
