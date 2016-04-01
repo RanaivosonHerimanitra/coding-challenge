@@ -17,7 +17,7 @@ On the cli inside `coding-challenge` directory, enter:
 
 ## Unit Tests:
 
-* Test for two consecutive tweets with no hashtag passed! Expected output `0.00`, `0.00'
+* Test for two consecutive tweets with no hashtag passed! Expected output `0.00`, `0.00`
 
 * Test for two consecutive tweets with 02 hashtags with exactly the same hashtags passed! Expected output `1.00`, `1.00`
 
