@@ -16,9 +16,12 @@ def read_json_tweets(pathname):
 	data_json = pd.read_json(data_json);
 	return data_json[['created_at','id','entities']]
 
+
+
+
 ###############################################################################
-# process hashtags,date of creation into arrays:
-# The idea is to have one list of hashtag per Id
+# process hashtags,date of creation (created_at) into lists:
+# The idea is to have a list of hashtag(s) per Id
 # so for each Id, gather into a list all hashtags
 def process_hashtags_into_array(df):
 	#loop thru  id of users
@@ -39,9 +42,17 @@ def process_hashtags_into_array(df):
 		non_empty_hashtags_content=[]
 	return hashtags_text
 
-########## select last 60 seconds of incoming hashtags using their date of creation 
-# No matter time order of incoming hashtags within 60s window
-# this function will always retain latest 60 seconds:
+
+
+
+
+###############################################################################
+
+########## select last 60 seconds of incoming (current) hashtags using their 
+# date of creation.
+# No matter time order of incoming tweets, only tweets that lie within
+# latest 60seconds window will be processed.
+
 def select_last60_seconds(text_hashtags,time_hashtags):
 	max_timestamp_value=np.max(time_hashtags)
 	min_timestamp_value = max_timestamp_value - np.timedelta64(60, 's')
@@ -54,8 +65,16 @@ def select_last60_seconds(text_hashtags,time_hashtags):
 			latest60_hashtags_time.append(mytime)
 	return latest60_hashtags_text,latest60_hashtags_time
 
-###############################################################################
 
+
+
+
+
+
+
+
+
+###############################################################################
 ################# transform hashtags into graph structure:####
 ############### then calculate average degree #############
 def generate_graph(text_hashtags):
@@ -72,12 +91,17 @@ def generate_graph(text_hashtags):
 					mylist= list ( set(t) -set([x]) )
 					#handle if already present in the graph:
 					if x in mydict.keys():
-						#merge distinct elmnt:
+						#merge distinct elmnt (existing + new):
 						mydict[x]=list(set(mydict[x] + mylist))
 					else:
 						#otherwise append directly:
 						mydict[x]= mylist							
 	return mydict
+
+
+
+
+############################################################################
 ############################## compute average degree ####################
 def compute_average_degree(mydict):
 	if len(mydict)==0:
@@ -89,15 +113,26 @@ def compute_average_degree(mydict):
 		average_degree=np.nanmean( mydict.values() )*1.00
 	return average_degree
 
+
+
 ###############################################################################
 ############### write average degree in output.txt #########################
 def write_output(output_value):
 	#open with append option:
 	#'tweet_output/output.txt'==>sys.argv[2] (second argument, output)
 	f = open(sys.argv[2], 'a')
+	# to handle x.xx format:
 	f.write(str(format(output_value, '.2f'))+'\n')
 	f.close()
+
+
+
+
+
+
+############################################################################
 ############### stream average degree of tweets hashtags as they come ######
+############### using all functions created above ##########################
 def stream_average_degree (text_hashtags):
 	for i in range(1,len(text_hashtags)+1):
 		txt,_=select_last60_seconds(text_hashtags[:i],df['created_at'][:i])
@@ -108,8 +143,15 @@ def stream_average_degree (text_hashtags):
 		average=compute_average_degree(graph) 
 		print "rolling mean at " + str(i) + " is " + str(format(average, '.2f'))
 		write_output(average)
+
+
+
+
+
+
+############################################################################
 ##############################Main program########################################
-#sys.argv[1]===>"tweet_input/tweets.txt" (first argument,input )
+#sys.argv[1]===>"tweet_input/tweets.txt" (look at run.sh)
 df=read_json_tweets(sys.argv[1])
 text_hashtags=process_hashtags_into_array(df=df)
 stream_average_degree(text_hashtags=text_hashtags)
