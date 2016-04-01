@@ -109,6 +109,7 @@ def stream_average_degree (text_hashtags):
 		write_output(average)
 ##############################Main program########################################
 import sys
+import os 
 #sys.argv[1]===>"tweet_input/tweets.txt" (first argument,input )
 df=read_json_tweets(sys.argv[1])
 text_hashtags=process_hashtags_into_array(df=df)
