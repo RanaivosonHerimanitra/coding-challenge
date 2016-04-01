@@ -92,7 +92,8 @@ def compute_average_degree(mydict):
 ############### write average degree in output.txt #########################
 def write_output(output_value):
 	#open with append option:
-	f = open('tweet_output/output.txt', 'a')
+	#'tweet_output/output.txt'==>sys.argv[2] (second argument, output)
+	f = open(sys.argv[2], 'a')
 	f.write(str(format(output_value, '.2f'))+'\n')
 	f.close()
 ############### stream average degree of tweets hashtags as they come ######
@@ -107,6 +108,8 @@ def stream_average_degree (text_hashtags):
 		print "rolling mean at " + str(i) + " is " + str(format(average, '.2f'))
 		write_output(average)
 ##############################Main program########################################
-df=read_json_tweets("tweet_input/tweets.txt")
+import sys
+#sys.argv[1]===>"tweet_input/tweets.txt" (first argument,input )
+df=read_json_tweets(sys.argv[1])
 text_hashtags=process_hashtags_into_array(df=df)
 stream_average_degree(text_hashtags=text_hashtags)
