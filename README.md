@@ -67,5 +67,5 @@ Hashtags from this last test include:
 
 To run tests I provided, enter:
 
-`myrun_tests.sh`
+`bash myrun_tests.sh`
 
