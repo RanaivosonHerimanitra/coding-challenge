@@ -101,7 +101,6 @@ def stream_average_degree (text_hashtags):
 		txt,_=select_last60_seconds(text_hashtags[:i],df['created_at'][:i])
 		#generate graph (a dict that map each hashtag)
 		graph=generate_graph(txt)
-		
 		#compute average degree of a node and store cumulated results 
 		#as tweets come:
 		average=compute_average_degree(graph) 
