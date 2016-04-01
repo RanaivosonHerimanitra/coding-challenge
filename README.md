@@ -15,13 +15,8 @@ On the cli inside `coding-challenge` directory, enter:
 `bash run.sh` 
 (ensure you have correct permission otherwise add `sudo` before `bash`)
 
-## Unit Tests:
 
-* Test for two consecutive tweets with no hashtag passed! Expected output `0.00`, `0.00`
-
-* Test for two consecutive tweets with 02 hashtags with exactly the same hashtags passed! Expected output `1.00`, `1.00`
-
-## Details implementation:
+## Algorithm (details implementation):
 
 1. a function reads data from `tweets.txt` and parse it so that built-in function from `pandas` package can easily transform it into a dataframe.
 
@@ -36,9 +31,14 @@ consistency during streaming.
 
  * Second function of this streaming process generates graph (a dictionnary data structure in `python`) that corresponds to current tweets.
 
- * Third function of this streaming process calculates average degree of current nodes (each node corresponds to a `hashtag`, each node corresponds to a key of the dictionnary where values are list connected nodes ):
+ * Third function of this streaming process calculates average degree of current nodes (each node corresponds to a `hashtag`, each node corresponds to a key of the dictionnary where values are list of connected nodes ):
 
  * The idea of the calculation is to replace values of each key by their number(#) of elements then average the all. 
 
 
 
+## Unit Tests:
+
+* Test for two consecutive tweets with no hashtag passed! Expected output `0.00`, `0.00`
+
+* Test for two consecutive tweets with 02 hashtags with exactly the same hashtags passed! Expected output `1.00`, `1.00`
